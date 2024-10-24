@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% block title %}Pagina de hoteles{% endblock %}
+{% block content %}
+    <section>
+        <div class="buscador-vuelos">
+            <div class="search-bar">
+                
+                <label for="destino">Destino:</label>
+                <input type="text" id="destino" name="destino" placeholder="Aeropuerto de destino">
+                
+                <label for="fecha-ida">Fecha de ida:</label>
+                <input type="date" id="fecha-ida" name="fecha-ida">
+                
+                <label for="fecha-vuelta">Fecha de vuelta:</label>
+                <input type="date" id="fecha-vuelta" name="fecha-vuelta">
+                
+                <label for="pasajeros">Pasajeros:</label>
+                <select id="pasajeros" name="pasajeros">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                
+                <button type="submit">Buscar Hoteles</button>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Los mas buscados</h2>
+        <div class="fila-cards">
+            <div class="cards">
+              <img src="" alt="Imagen 1">
+              <div class="texto-cards">
+                <h3>Título de la imagen 1</h3>
+              </div>
+            </div>
+            <div class="cards">
+              <img src="" alt="Imagen 2">
+              <div class="texto-cards">
+                <h3>Título de la imagen 2</h3>
+              </div>
+            </div>
+            <div class="cards">
+              <img src="" alt="Imagen 3">
+              <div class="texto-cards">
+                <h3>Título de la imagen 3</h3>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section>
+        <h2>Segun tus ultimas busquedas..</h2>
+        <div class="fila-cards">
+            <div class="cards">
+              <img src="" alt="Imagen 1">
+              <div class="texto-cards">
+                <h3>Título de la imagen 1</h3>
+              </div>
+            </div>
+            <div class="cards">
+              <img src="" alt="Imagen 2">
+              <div class="texto-cards">
+                <h3>Título de la imagen 2</h3>
+              </div>
+            </div>
+            <div class="cards">
+              <img src="" alt="Imagen 3">
+              <div class="texto-cards">
+                <h3>Título de la imagen 3</h3>
+              </div>
+            </div>
+          </div>
+    </section>
+{% endblock %}

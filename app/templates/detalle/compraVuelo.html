@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block title %}Detalle vuelo{% endblock %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="flight-details">
+                <h2>Detalles del Vuelo</h2>
+                <div class="flight">
+                    <h3>Vuelo de Ida</h3>
+                    <p>Fecha: 2023-10-15</p>
+                    <p>Horario: 10:00 AM - 12:00 PM</p>
+                    <p>Escala: No</p>
+                </div>
+                <div class="flight">
+                    <h3>Vuelo de Vuelta</h3>
+                    <p>Fecha: 2023-10-20</p>
+                    <p>Horario: 2:00 PM - 4:00 PM</p>
+                    <p>Escala: 1 escala en Madrid</p>
+                </div>
+            </div>
+            <div class="price-summary">
+                <h2>Resumen de Precio</h2>
+                <p>Precio del pasaje: $250</p>
+                <p>Comision de la pagina: $50</p>
+                <p>Precio Total: $300</p>
+                <button id="finalizar-compra">Finalizar Compra</button>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+    

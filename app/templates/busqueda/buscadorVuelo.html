@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block title %}Busca tu vuelo{% endblock %}
+{% block content %}
+
+    <section>
+        <div class="buscador-vuelos">
+            <div class="search-bar">
+                <label for="origen">Origen:</label>
+                <input type="text" id="origen" name="origen" placeholder="Aeropuerto de origen">
+                
+                <label for="destino">Destino:</label>
+                <input type="text" id="destino" name="destino" placeholder="Aeropuerto de destino">
+                
+                <label for="fecha-ida">Fecha de ida:</label>
+                <input type="date" id="fecha-ida" name="fecha-ida">
+                
+                <label for="fecha-vuelta">Fecha de vuelta:</label>
+                <input type="date" id="fecha-vuelta" name="fecha-vuelta">
+                
+                <label for="pasajeros">Pasajeros:</label>
+                <select id="pasajeros" name="pasajeros">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                
+                <button type="submit">Buscar vuelos</button>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="flight-card">
+            <h2>Vuelo de Ida y Vuelta</h2>
+            <div class="flight-info">
+                <h3>Vuelo de Ida</h3>
+                <p><strong>Pais de Origen:</strong> {{ vuelo_ida.origen }}</p>
+                <p><strong>Pais de Destino:</strong> {{ vuelo_ida.destino }}</p>
+                <p><strong>Fecha de Salida:</strong> {{ vuelo_ida.fecha_salida }}</p>
+                <p><strong>Hora de Salida:</strong> {{ vuelo_ida.hora_salida }}</p>
+                <p><strong>Hora de Llegada:</strong> {{ vuelo_ida.hora_llegada }}</p>
+                <p><strong>Tipo de Vuelo:</strong> {{ vuelo_ida.tipo_vuelo }}</p>
+            </div>
+            <div class="flight-info">
+                <h3>Vuelo de Vuelta</h3>
+                <p><strong>Pais de Origen:</strong> {{ vuelo_vuelta.origen }}</p>
+                <p><strong>Pais de Destino:</strong> {{ vuelo_vuelta.destino }}</p>
+                <p><strong>Fecha de Salida:</strong> {{ vuelo_vuelta.fecha_salida }}</p>
+                <p><strong>Hora de Salida:</strong> {{ vuelo_vuelta.hora_salida }}</p>
+                <p><strong>Hora de Llegada:</strong> {{ vuelo_vuelta.hora_llegada }}</p>
+                <p><strong>Tipo de Vuelo:</strong> {{ vuelo_vuelta.tipo_vuelo }}</p>
+            </div>
+            <form action="/comprar" method="POST">
+                <button type="submit" class="buy-button">Comprar Pasaje</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+    

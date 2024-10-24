@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block title %}Detalle hotel{% endblock %}
+{% block content %}
+    <main class="detalle">
+        <section class="hotel-container">
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="imagen1.jpg" alt="Imagen del hotel">
+                </div>
+                <div class="gallery-item">
+                    <img src="imagen2.jpg" alt="Imagen del hotel">
+                </div>
+                <div class="gallery-item">
+                    <img src="imagen3.jpg" alt="Imagen del hotel">
+                </div>
+                <div class="gallery-item">
+                    <img src="imagen4.jpg" alt="Imagen del hotel">
+                </div>
+            </div>
+            <h1 class="hotel-title">Nombre del Hotel</h1>
+            <p class="hotel-summary">Este hotel ofrece una experiencia única, con habitaciones confortables, servicios de primera y vistas impresionantes. Perfecto para una escapada o unas vacaciones en familia.</p>
+        </section>
+        <aside class="room-selection">
+            <h2>Selecciona tu habitación</h2>
+            <form action="{{ url_for('realizar_pago') }}" method="POST">
+                <label for="guests">Cantidad de huéspedes:</label>
+                <select id="guests" name="guests">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <div class="room-option">
+                    <h3>Habitación Doble</h3>
+                    <p>$150 por noche</p>
+                </div>
+                <div class="room-option">
+                    <h3>Suite Familiar</h3>
+                    <p>$250 por noche</p>
+                </div>
+                <button type="submit">Realizar Pago</button>
+            </form>
+        </aside>
+    </main>
+{% endblock %}   
