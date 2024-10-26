@@ -57,7 +57,7 @@ def Precios_de_Vuelos():
 @app.route('/Precios_de_Hoteles')
 def Precios_de_Hoteles():
     return render_template('Precios_de_Hoteles.html')
-
+    
 
 @app.route('/buscarVuelo')
 def buscarVuelo():
@@ -116,7 +116,7 @@ def buscarHotel():
     return render_template('buscarHotel.html', hotels=hotels)
 
 
-SERPAPI_API_KEY = 'feea122bafbb43aa26a1e19e957c5a558392c4be1d498f7c8b89a7d911648c5b'
+SERPAPI_API_KEY = os.getenv("feea122bafbb43aa26a1e19e957c5a558392c4be1d498f7c8b89a7d911648c5b") 
 
 @app.route('/buscar_Precios_de_Vuelos')
 def buscar_Precios_de_Vuelos():
