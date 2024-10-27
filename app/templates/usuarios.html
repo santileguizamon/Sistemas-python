@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Usuarios</title>
+</head>
+<body>
+    <header>
+    <h1>Usuarios</h1>
+    </header>
+
+    <br><br>
+
+    <h2>Nombre: {{infoPersona.name}}</h2>
+    <p>Genero: {{infoPersona.gender}}</p>
+    <p>Dirección: {{infoPersona.street}}</p>
+    <p>Ciudad: {{infoPersona.city}}</p>
+    <p>Estado: {{infoPersona.state}}</p>
+    <p>Pais: {{infoPersona.country}}</p>
+    <p>Email: {{infoPersona.email}}</p>
+    <p>Celular: {{infoPersona.celular}}</p>
+
+    <br><br>
+
+    <button><a href="/Lista_de_Usuarios">Volver</a></button>
+
+    <footer>
+        <p>© 2024 Mi aplicación Flask</p>
+    </footer>
+
+</body>
+</html>
