@@ -1,7 +1,7 @@
 from flask import Flask
-from app.blueprints.auth.routes import auth_bp
-from app.blueprints.busqueda.routes import busqueda_bp
-from app.blueprints.detalle.routes import detalle_bp
+from app.blueprints.auth import auth_bp
+from app.blueprints.busqueda import busqueda_bp
+from app.blueprints.detalle import detalle_bp
 
 def create_app():
     app=Flask(__name__)

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Precios de Hoteles</title>
+</head>
+<body>
+    <header>
+    <h1>Resultados de la Búsqueda de Hoteles</h1>
+    <button><a href="{{url_for('detalle.Precios_de_Hoteles')}}">Volver</a></button>
+    </header>
+    {% for hotel in hotels %}
+        <div class="hotel">
+            <h2>{{ hotel.name }}</h2>
+            <img src="{{ hotel.images[0].original_image }}" alt="{{ hotel.name }}">
+            <p>Precio por Noche: {{ hotel.rate_per_night.lowest }} </p>
+            <p>Precio sin Impuestos : {{ hotel.rate_per_night.before_taxes_fees }}</p>
+            
+        </div>
+    {% else %}
+        <p>No hotels found.</p>
+    {% endfor %}
+
+    <footer>
+        <p>© 2024 Mi aplicación Flask</p>
+    </footer>
+
+</body>
+</html>

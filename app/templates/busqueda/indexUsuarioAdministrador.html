@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Mockup Usuario Administrador</title>
+</head>
+<body>
+    
+    <div class="container">
+        <header>
+        <h1>Bienvenidos</h1>
+
+    </header>  
+        <p>Escoja una opción para seguir con el proceso</p>
+
+        <button><a href="{{url_for('detalle.Lista_de_Usuarios')}}">Lista de Usuarios</a></button>
+        <button><a href="{{url_for('detalle.Vuelos')}}">Vuelos</a></button>
+        <button><a href="{{url_for(detalle.'Hoteles')}}">Hoteles</a></button>
+        <button><a href="{{url_for(detalle.'Precios_de_Vuelos')}}">Precios de Vuelos</a></button>
+        <button><a href="{{url_for('detalle.Precios_de_Hoteles')}}">Precios de Hoteles</a></button> 
+    
+    </div>
+
+    <br><br>
+
+    <footer>
+        <p>© 2024 Mi aplicación Flask</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Buscar Vuelo</title>
+</head>
+<body>
+    <header>
+    <h1>Resultados de la Búsqueda de Vuelos</h1>
+    </header>
+
+    <h2>Buscando vuelos de {{ departure_id }} a {{ arrival_id }}</h2>
+
+    {% if best_flights %}
+        <ul>
+            {% for flight in best_flights %}
+                <li>
+                    <h3>Aerolínea: <img src="{{ flight['airline_logo'] }}" alt="{{ flight['airline'] }}" style="width:30px;"> {{ flight['airline'] }}</h3>
+                    <p>Precio: {{ flight['price'] }} USD</p>
+                    <p>Duración total: {{ flight['total_duration'] // 60 }} horas {{ flight['total_duration'] % 60 }} minutos</p>
+                    <p>Salida: {{ flight['flights'][0]['departure_airport']['name'] }} a las {{ flight['flights'][0]['departure_airport']['time'] }}</p>
+                    <p>Llegada: {{ flight['flights'][-1]['arrival_airport']['name'] }} a las {{ flight['flights'][-1]['arrival_airport']['time'] }}</p>
+                    <p>Escalas: {{ flight['layovers'] | length }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% elif error %}
+        <p>{{ error }}</p>
+    {% else %}
+        <p>No se encontraron vuelos.</p>
+    {% endif %}
+
+    <button><a href="{{url_for('detalle.Vuelos')}}">Volver</a></button>
+    
+    <br><br><br>
+    
+    <footer>
+        <p>© 2024 Mi aplicación Flask</p>
+    </footer>
+
+</body>
+</html>
+
