@@ -35,21 +35,19 @@
             <h2>Vuelo de Ida y Vuelta</h2>
             <div class="flight-info">
                 <h3>Vuelo de Ida</h3>
-                <p><strong>Pais de Origen:</strong> {{ vuelo_ida.origen }}</p>
-                <p><strong>Pais de Destino:</strong> {{ vuelo_ida.destino }}</p>
-                <p><strong>Fecha de Salida:</strong> {{ vuelo_ida.fecha_salida }}</p>
-                <p><strong>Hora de Salida:</strong> {{ vuelo_ida.hora_salida }}</p>
-                <p><strong>Hora de Llegada:</strong> {{ vuelo_ida.hora_llegada }}</p>
-                <p><strong>Tipo de Vuelo:</strong> {{ vuelo_ida.tipo_vuelo }}</p>
+                <p><strong>Pais de Origen:</strong> {{ vuelo.origen }}</p>
+                <p><strong>Pais de Destino:</strong> {{ vuelo.destino }}</p>
+                <p><strong>Fecha de Salida:</strong> {{ vuelo.fecha }}</p>
+                <p><strong>Hora de Salida:</strong> {{ vuelo.horario_salida }}</p>
+                <p><strong>Hora de Llegada:</strong> {{ vuelo.horario_llegada }}</p>
             </div>
             <div class="flight-info">
                 <h3>Vuelo de Vuelta</h3>
-                <p><strong>Pais de Origen:</strong> {{ vuelo_vuelta.origen }}</p>
-                <p><strong>Pais de Destino:</strong> {{ vuelo_vuelta.destino }}</p>
-                <p><strong>Fecha de Salida:</strong> {{ vuelo_vuelta.fecha_salida }}</p>
-                <p><strong>Hora de Salida:</strong> {{ vuelo_vuelta.hora_salida }}</p>
-                <p><strong>Hora de Llegada:</strong> {{ vuelo_vuelta.hora_llegada }}</p>
-                <p><strong>Tipo de Vuelo:</strong> {{ vuelo_vuelta.tipo_vuelo }}</p>
+                <p><strong>Pais de Origen:</strong> {{ vuelo.origen }}</p>
+                <p><strong>Pais de Destino:</strong> {{ vuelo.destino }}</p>
+                <p><strong>Fecha de Salida:</strong> {{ vuelo.fecha_salida }}</p>
+                <p><strong>Hora de Salida:</strong> {{ vuelo.horario_salida }}</p>
+                <p><strong>Hora de Llegada:</strong> {{ vuelo.horario_llegada }}</p>
             </div>
             <form action="/comprar" method="POST">
                 <button type="submit" class="buy-button">Comprar Pasaje</button>
