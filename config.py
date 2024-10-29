@@ -43,7 +43,7 @@ api_response = api_result.json()
 
 
 
-url = 
+url = 'https://randomuser.me/api/'
 headers = {
 }
 

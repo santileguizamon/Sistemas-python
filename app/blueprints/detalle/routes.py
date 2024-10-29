@@ -16,9 +16,6 @@ def compraVuelo():
 
 @detalle_bp.route('/detalleHotel')
 def  detalleHotel():
-<<<<<<< HEAD
-    return render_template('detalle.detalleHotel')
-=======
     return render_template('detalle/detalleHotel')
 
 @detalle_bp.route('/users')
@@ -66,5 +63,3 @@ def Precios_de_Vuelos():
 def Precios_de_Hoteles():
     return render_template('detalle/Precios_de_Hoteles.html')
     
-
->>>>>>> bc6e2e2ab6c6ed7a759430e09f51fb0aeb1c41f7
