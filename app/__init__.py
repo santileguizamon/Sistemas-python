@@ -13,3 +13,5 @@ def create_app():
     app.register_blueprint(detalle_bp)
 
     return app
+
+

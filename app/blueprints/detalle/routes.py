@@ -32,7 +32,7 @@ def users():
         'state': user['location']['state'],
         'country': user['location']['country'],
         'email': user['email'],
-        'celular': user['cell'],
+        'celular': user['cell']
 
     }
     return render_template("detalle/usuarios.html" , infoPersona =infoPersona )

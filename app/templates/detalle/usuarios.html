@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>Usuarios</title>
 </head>
 <body>
@@ -21,10 +21,11 @@
     <p>Pais: {{infoPersona.country}}</p>
     <p>Email: {{infoPersona.email}}</p>
     <p>Celular: {{infoPersona.celular}}</p>
+    
 
     <br><br>
 
-    <button><a href="/Lista_de_Usuarios">Volver</a></button>
+    <button><a href="/detalle/Lista_de_Usuarios">Volver</a></button>
 
     <footer>
         <p>© 2024 Mi aplicación Flask</p>
