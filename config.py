@@ -1,3 +1,5 @@
+import requests
+
 HEADERS = {
 
 'x-Master-Key' : '$2a$10$TBHIT0URiuQTffLWJQLlvunqZLmjpYsrRxAKGoL7t/imbvztClSO.'
@@ -30,7 +32,7 @@ Estructura básica de jsonbin
   ]
 }
 """
-import requests
+
 
 params = {
   'access_key': 'ab4cb3a8be3f01ec3ad753e67407d71f'

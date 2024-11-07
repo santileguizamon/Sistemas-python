@@ -5,7 +5,7 @@ from flask import jsonify
 app = create_app()
 
 def my_custom_filter(value):
-    return value  # Modifica la lógica según sea necesario
+    return value  
 
 app.template_filter()(my_custom_filter)
 
