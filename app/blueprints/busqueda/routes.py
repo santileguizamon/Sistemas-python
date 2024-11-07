@@ -1,13 +1,13 @@
 from flask import Blueprint, render_template,json
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from datetime import datetime
-from serpapi import GoogleSearch
+#from serpapi import GoogleSearch
 import os
 import random
 import requests
 
-load_dotenv()
-API_KEY = os.getenv("SERPAPI_API_KEY")
+#load_dotenv()
+#API_KEY = os.getenv("SERPAPI_API_KEY")
 
 from config import HEADERS, JSONBIN_URL
 
