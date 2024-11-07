@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template,url_for,request,redirect
 from flask import Flask, jsonify
 from datetime import datetime
-from serpapi import GoogleSearch
+#from serpapi import GoogleSearch
 import os
 import random
 import requests
@@ -12,12 +12,10 @@ detalle_bp = Blueprint('detalle',__name__,url_prefix='/detalle')
 
 @detalle_bp.route('/compraVuelo')
 def compraVuelo():
-    return render_template('detalle.compraVuelo.html')
+    return render_template('detalle/compraVuelo.html')
 
 @detalle_bp.route('/detalleHotel')
 def  detalleHotel():
-
-    return render_template('detalle.detalleHotel')
 
     return render_template('detalle/detalleHotel')
 
