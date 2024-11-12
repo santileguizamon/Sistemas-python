@@ -1,10 +1,13 @@
 {% extends 'layout.html' %}
-{% block title %}SignIn{% endblock %}
+{% block title %}Iniciar sesión{% endblock %}
 {% block content %}
 
     <section>
         <div class="containerFormulario">
-            <form action="{{ url_for('submit')}}"  method="POST">
+            {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+            <form action="{{ url_for('auth.signIn')}}"  method="POST">
 
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email </label>
@@ -19,7 +22,7 @@
                     <label class="form-check-label" for="exampleCheck1">Mantenerme deslogueado</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Entrar</button>
-                <a href="{{ url_for('signUp')}} ">Crear una cuenta</a>
+                <a href="{{ url_for('auth.signUp')}} ">Crear una cuenta</a>
             </form>
         </div>
     </section>

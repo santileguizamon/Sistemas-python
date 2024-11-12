@@ -1,10 +1,12 @@
 {% extends 'layout.html' %}
-{% block title %}SignUp{% endblock %}
-{% block content %}
 
+{% block title %}SignUp{% endblock %}
+
+{% block content %}
     <div class="containerFormulario">
         <h2>Registro</h2>
-        <form action="{{ url_for('submit')}}" method="post">
+        <!-- Cambié el 'action' a 'auth.signUp' -->
+        <form action="{{ url_for('auth.signUp') }}" method="post">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre" id="nombre" required>
@@ -32,5 +34,4 @@
             <button type="submit" value="registrar" class="btn btn-primary">Registrar</button>
         </form>
     </div>
-
 {% endblock %}

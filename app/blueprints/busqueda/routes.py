@@ -33,19 +33,19 @@ def  indexUsuarioAdministrador():
 def   indexHotel():
     return render_template('busqueda/indexHotel.html')
 
-busqueda_bp.route('/buscadorVuelo')
+@busqueda_bp.route('/buscadorVuelo', methods = ['POST'])
 def  buscadorVuelo():
      return render_template('busqueda/buscadorVuelo.html')
 
 
 @busqueda_bp.route('/buscadorVuelo',methods=['GET','POST'])
 def buscadorVueloSection():
-    if request.method == 'POST':
-        origen = request.form.get('origen')
-        destino = request.form.get('destino')
-        fecha_ida = request.form.get('fecha-ida')
-        fecha_vuelta = request.form.get('fecha-vuelta')
-        pasajeros = request.form.get('pasajeros')
+    if requests.method == 'POST':
+        origen = requests.form.get('origen')
+        destino = requests.form.get('destino')
+        fecha_ida = requests.form.get('fecha-ida')
+        fecha_vuelta = requests.form.get('fecha-vuelta')
+        pasajeros = requests.form.get('pasajeros')
 
     try:
         api_result = requests.get('https://api.aviationstack.com/v1/flights', params)

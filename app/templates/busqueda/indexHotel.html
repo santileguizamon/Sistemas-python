@@ -6,15 +6,15 @@
             <div class="search-bar">
                 
                 <label for="destino">Destino:</label>
-                <input type="text" id="destino" name="destino" placeholder="Aeropuerto de destino">
+                <input type="text" id="destino" name="destino" placeholder="Ingresa una ciudad, alojamiento">
                 
-                <label for="fecha-ida">Fecha de ida:</label>
+                <label for="fecha-entrada">Fecha de Entrada:</label>
                 <input type="date" id="fecha-ida" name="fecha-ida">
                 
-                <label for="fecha-vuelta">Fecha de vuelta:</label>
+                <label for="fecha-salida">Fecha de Salida:</label>
                 <input type="date" id="fecha-vuelta" name="fecha-vuelta">
                 
-                <label for="pasajeros">Pasajeros:</label>
+                <label for="habitaciones">Habitaciones:</label>
                 <select id="pasajeros" name="pasajeros">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -31,21 +31,21 @@
         <h2>Los mas buscados</h2>
         <div class="fila-cards">
             <div class="cards">
-              <img src="" alt="Imagen 1">
+              <img src="{{ url_for('static', filename='css/Los mas buscados 1.png') }}" alt="Imagen 1"/>
               <div class="texto-cards">
-                <h3>Título de la imagen 1</h3>
+                <h3>Let Sun Hotel Boutique</h3>
               </div>
             </div>
             <div class="cards">
-              <img src="" alt="Imagen 2">
+              <img src="{{ url_for('static', filename='css/Los mas buscados 2.png') }}" alt="Imagen 2"/>
               <div class="texto-cards">
-                <h3>Título de la imagen 2</h3>
+                <h3>La Cascada Townhouse Hotel</h3>
               </div>
             </div>
             <div class="cards">
-              <img src="" alt="Imagen 3">
+              <img src="{{ url_for('static', filename='css/Los mas buscados 3.png') }}" alt="Imagen 3"/>
               <div class="texto-cards">
-                <h3>Título de la imagen 3</h3>
+                <h3>Comfort and Style Just Steps From Fundación Favaloro</h3>
               </div>
             </div>
           </div>
@@ -54,21 +54,21 @@
         <h2>Segun tus ultimas busquedas..</h2>
         <div class="fila-cards">
             <div class="cards">
-              <img src="" alt="Imagen 1">
+              <img src="{{ url_for('static', filename='css/Ultimas Busquedas 1.png') }}" alt="Imagen 1"/>
               <div class="texto-cards">
-                <h3>Título de la imagen 1</h3>
+                <h3>474 Buenos Aires Hotel</h3>
               </div>
             </div>
             <div class="cards">
-              <img src="" alt="Imagen 2">
+              <img src="{{ url_for('static', filename='css/Ultimas Busquedas 2.png') }}" alt="Imagen 2"/>
               <div class="texto-cards">
-                <h3>Título de la imagen 2</h3>
+                <h3>Hotel Clasico</h3>
               </div>
             </div>
             <div class="cards">
-              <img src="" alt="Imagen 3">
+              <img src="{{ url_for('static', filename='css/Ultimas Busquedas 3.png') }}" alt="Imagen 3"/>
               <div class="texto-cards">
-                <h3>Título de la imagen 3</h3>
+                <h3>Dreaming Uriarte</h3>
               </div>
             </div>
           </div>

@@ -18,7 +18,7 @@
     margin-top: 2rem; 
 }
 .cards {
-    flex: 1 1 calc(33.33% - 2rem); 
+    flex: 1 1 calc(33% - 2rem); 
     margin: 1rem; 
     border: 1px solid #72a4ea; 
     border-radius: 1rem; 
@@ -27,8 +27,8 @@
 } 
 .cards img {
     width: 100%;
-    height: auto; 
-    max-height: 15vh; 
+    height: 100%; 
+    max-height: 28vh; 
     object-fit: cover; 
 }  
 .texto-cards {

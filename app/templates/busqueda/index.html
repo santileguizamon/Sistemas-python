@@ -5,7 +5,7 @@
 <section>
   <div class="buscador-vuelos">
     <h2>Buscar vuelos</h2>
-    <form action="{% url 'buscarVuelos' %}" method="POST">
+    <form action="{{ url_for('busqueda.buscadorVuelo') }}" method="POST">
       <div class="search-bar">
         <label for="origen">Origen:</label>
         <input type="text" id="origen" name="origen" placeholder="Aeropuerto de origen">
@@ -28,31 +28,54 @@
           <option value="5">5</option>
         </select>
 
-        <button type="submit">Buscar vuelos</button>
-      </div>
-    </form>
-  </div>
-</section>
-<section>
-  <div class="fila-cards">
-    <div class="cards">
-      <img src="" alt="Imagen 1">
-      <div class="texto-cards">
-        <h3>{{ vuelo.origen }}</h3>
-      </div>
-    </div>
-    <div class="cards">
-      <img src="" alt="Imagen 2">
-      <div class="texto-cards">
-        <h3>{{ vuelo.destino }}</h3>
-      </div>
-    </div>
-    <div class="cards">
-      <img src="" alt="Imagen 3">
-      <div class="texto-cards">
-        <h3>{{ vuelo.origen }}</h3>
-      </div>
-    </div>
-  </div>
-</section>
+        <button type="submit">Buscar Vuelos</button>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Los mas buscados</h2>
+        <div class="fila-cards">
+            <div class="cards">
+              <img src="{{ url_for('static', filename='css/Rio de Janeiro.png') }}" alt="Imagen 1"/>
+              <div class="texto-cards">
+                <h3>Rio de Janeiro</h3>
+              </div>
+            </div>
+            <div class="cards">
+              <img src="{{ url_for('static', filename='css/Miami.png') }}" alt="Imagen 2"/>
+              <div class="texto-cards">
+                <h3>Miami</h3>
+              </div>
+            </div>
+            <div class="cards">
+              <img src="{{ url_for('static', filename='css/Madrid.png') }}" alt="Imagen 3"/>
+              <div class="texto-cards">
+                <h3>Madrid</h3>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section>
+        <h2>Vuelos por el País...</h2>
+        <div class="fila-cards">
+            <div class="cards">
+              <img src="{{ url_for('static', filename='css/San Carlos de Bariloche.png') }}" alt="Imagen 1"/>
+              <div class="texto-cards">
+                <h3>San Carlos de Bariloche</h3>
+              </div>
+            </div>
+            <div class="cards">
+              <img src="{{ url_for('static', filename='css/Puerto Iguazu.png') }}" alt="Imagen 2"/>
+              <div class="texto-cards">
+                <h3>Puerto Iguazú</h3>
+              </div>
+            </div>
+            <div class="cards">
+              <img src="{{ url_for('static', filename='css/Mendoza.png') }}" alt="Imagen 3"/>
+              <div class="texto-cards">
+                <h3>Mendoza</h3>
+              </div>
+            </div>
+          </div>
+    </section>
 {% endblock %}
