@@ -1,25 +1,18 @@
-from flask import Blueprint, render_template,json
-#from dotenv import load_dotenv
+from flask import Blueprint, render_template, request
 from datetime import datetime
-#from serpapi import GoogleSearch
-import os
+import sqlite3
 import random
 import requests
 
-#load_dotenv()
-#API_KEY = os.getenv("SERPAPI_API_KEY")
 
 from config import HEADERS, JSONBIN_URL
 
+def conectar():
+    return sqlite3.connect('agencia_viajes.db')
+
 busqueda_bp = Blueprint('busqueda',__name__,url_prefix='/busqueda')
 
-params = {
-  'access_key': 'ab4cb3a8be3f01ec3ad753e67407d71f'
-}
-headers = {
-	"x-rapidapi-key": "Sign Up for Key",
-	"x-rapidapi-host": "agoda-com.p.rapidapi.com"
-}
+
 
 @busqueda_bp.route('/index')
 def  index():
@@ -40,34 +33,46 @@ def  buscadorVuelo():
 
 @busqueda_bp.route('/buscadorVuelo',methods=['GET','POST'])
 def buscadorVueloSection():
-    if requests.method == 'POST':
-        origen = requests.form.get('origen')
-        destino = requests.form.get('destino')
-        fecha_ida = requests.form.get('fecha-ida')
-        fecha_vuelta = requests.form.get('fecha-vuelta')
-        pasajeros = requests.form.get('pasajeros')
+    origen = request.form.get('origen', '').strip()
+    destino = request.form.get('destino', '').strip()
+    fecha_ida = request.form.get('fecha-ida', '')
+    fecha_vuelta = request.form.get('fecha-vuelta', '')
 
-    try:
-        api_result = requests.get('https://api.aviationstack.com/v1/flights', params)
-        api_result.raise_for_status()
-        data = api_result.json()
     
-        vuelos_info = []
-        for vuelo in data['data']:  
-            vuelo_info = {
-                'nombre': vuelo.get('flight', {}).get('iata'),  
-                'horario_salida': vuelo.get('departure', {}).get('estimated'),
-                'fecha ': vuelo.get('departure', {}).get('scheduled'),    
-                'destino': vuelo.get('arrival', {}).get('iata'),  
-                'origen': vuelo.get('departure', {}).get('iata'), 
-                'horario_llegada': vuelo.get('arrival', {}).get('estimated')
-            }
-            vuelos_info.append(vuelo_info)
-        
-        return jsonify(vuelos_info)
-    except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
+    conexion = conectar()
+    cursor = conexion.cursor()
 
+  
+    query = '''
+    SELECT nombre_avion, horario_salida, horario_llegada, precio
+    FROM vuelos
+    WHERE 1=1
+    '''
+    params = []
+
+    if origen:
+        query += " AND origen_id = (SELECT id FROM lugares WHERE nombre = ?)"
+        params.append(origen)
+
+    if destino:
+        query += " AND destino_id = (SELECT id FROM lugares WHERE nombre = ?)"
+        params.append(destino)
+
+    if fecha_ida:
+        query += " AND DATE(horario_salida) = ?"
+        params.append(fecha_ida)
+
+    if fecha_vuelta:
+        query += " AND DATE(horario_llegada) = ?"
+        params.append(fecha_vuelta)
+
+
+    cursor.execute(query, params)
+    vuelos = cursor.fetchall()
+
+    conexion.close()
+
+    return render_template('busqueda.buscadorVuelo', vuelos=vuelos)
 
     
 
