@@ -1,7 +1,7 @@
 from app import create_app
 from datetime import datetime
-from db.conexion import conectar
-from db.setup_db import crear_tablas, insertar_datos
+from app.db.conexion import conectar
+from app.db.setup_db import crear_tablas, insertar_datos
 
 app = create_app()
 
