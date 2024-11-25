@@ -191,8 +191,6 @@ button {
     color: white;
     border: none;
     padding: 0.625rem 1rem;
-    margin-top: 2rem; 
-    border-radius: 0.3125rem; 
     cursor: pointer;
     font-size: 1rem; 
 }
@@ -376,3 +374,51 @@ section h2{
     background-color: #0056b3;
 }
   
+.container {
+    text-align: center; 
+}
+
+.btn {
+    padding: 10px 20px;
+}
+
+table {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 20px 0; 
+    font-size: 16px; 
+    text-align: left; 
+    background-color: #f9f9f9; 
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px 15px; 
+}
+
+thead th {
+    background-color: #72a4ea; 
+    color: white; 
+    font-weight: bold;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; 
+}
+
+tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+section {
+    padding: 20px; 
+}
+
+body {
+    font-family: Arial, sans-serif; 
+    line-height: 1.6;
+}

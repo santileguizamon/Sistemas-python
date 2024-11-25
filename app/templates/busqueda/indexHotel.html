@@ -1,10 +1,12 @@
 {% extends 'layout.html' %}
 {% block title %}Pagina de hoteles{% endblock %}
 {% block content %}
+
     <section>
-        <div class="buscador-vuelos">
+        <div class="buscador-hoteles">
+          <h2>Buscar Hoteles</h2>
+          <br>
             <div class="search-bar">
-                
                 <label for="destino">Destino:</label>
                 <input type="text" id="destino" name="destino" placeholder="Ingresa una ciudad, alojamiento">
                 
@@ -73,4 +75,13 @@
             </div>
           </div>
     </section>
+    <section>
+      <h2>Ver la Base de Datos de Hoteles</h2>
+      <div class="container">
+         <a href="{{ url_for('busqueda.ver_hoteles') }}" method="GET">
+              <button type="button">Ver Hoteles</button>
+          </a>
+      </div>
+  </section>
+  <br>
 {% endblock %}

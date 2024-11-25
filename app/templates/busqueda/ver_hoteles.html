@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block title %}Lista de Hoteles{% endblock %}
+{% block content %}
+<section>
+<h2>Historial de Hoteles</h2>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Habitaciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hotel in hoteles %}
+        <tr>
+            <td>{{ hotel[0] }}</td>
+            <td>{{ hotel[1] }}</td>
+            <td>{{ hotel[2] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</section>
+<a href="{{ url_for('busqueda.index') }}">
+    <div class="container">
+    <button class="button">Volver al Inicio</button>
+    </div>
+  </a>
+<br>
+{% endblock %}

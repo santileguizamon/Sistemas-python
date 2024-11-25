@@ -1,7 +1,8 @@
+from app.db.conexion import conectar
+
 def crear_tablas(conexion):
     cursor = conexion.cursor()
 
-    # Crear tablas
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS lugares (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -13,14 +14,13 @@ def crear_tablas(conexion):
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS vuelos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre_avion TEXT NOT NULL,
-        origen_id INTEGER NOT NULL,
-        destino_id INTEGER NOT NULL,
-        horario_salida DATETIME NOT NULL,
-        horario_llegada DATETIME NOT NULL,
-        precio DECIMAL NOT NULL,
-        FOREIGN KEY (origen_id) REFERENCES lugares (id),
-        FOREIGN KEY (destino_id) REFERENCES lugares (id)
+        origen TEXT,
+        destino TEXT,
+        fecha_ida DATE,
+        fecha_vuelta DATE,
+        horario_salida DATETIME,
+        horario_llegada DATETIME,
+        pasajeros INTEGER
     )
     ''')
 
@@ -30,7 +30,6 @@ def crear_tablas(conexion):
         nombre TEXT NOT NULL,
         lugar_id INTEGER NOT NULL,
         descripcion TEXT,
-        imagenes IMG,
         habitaciones INTEGER NOT NULL,
         FOREIGN KEY (lugar_id) REFERENCES lugares (id)
     )
@@ -38,15 +37,9 @@ def crear_tablas(conexion):
 
     conexion.commit()
 
-def insertar_datos(conexion):
-    cursor = conexion.cursor()
 
-
-    lugares = [
-        ('Buenos Aires', 'origen'),
-        ('Madrid', 'destino'),
-        ('Barcelona', 'destino')
-    ]
-    cursor.executemany('INSERT INTO lugares (nombre, tipo) VALUES (?, ?)', lugares)
-
-    conexion.commit()
+if __name__ == "__main__":
+    conexion = conectar()
+    crear_tablas(conexion)
+    print("Base de datos configurada con éxito.")
+    conexion.close()

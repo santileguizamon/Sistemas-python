@@ -1,10 +1,12 @@
 {% extends 'layout.html' %}
-{% block title %}Pagina de vuelos{% endblock %}
+
+{% block title %}Página de Vuelos{% endblock %}
 {% block content %}
 
 <section>
   <div class="buscador-vuelos">
-    <h2>Buscar vuelos</h2>
+    <h2>Buscar Vuelos</h2>
+    <br>
     <form action="{{ url_for('busqueda.buscadorVuelo') }}" method="POST">
       <div class="search-bar">
         <label for="origen">Origen:</label>
@@ -34,28 +36,29 @@
   </div>
 </section>
 <section>
-  <h2>Los mas buscados</h2>
+  <h2>Los Mas Buscados</h2>
   <div class="fila-cards">
     <div class="cards">
-      <img src="{{ url_for('static', filename='css/Rio de Janeiro.png') }}" alt="Imagen 1" />
-      <div class="texto-cards">
-        <h3>Rio de Janeiro</h3>
-      </div>
-    </div>
-    <div class="cards">
-      <img src="{{ url_for('static', filename='css/Miami.png') }}" alt="Imagen 2" />
-      <div class="texto-cards">
-        <h3>Miami</h3>
-      </div>
-    </div>
-    <div class="cards">
-      <img src="{{ url_for('static', filename='css/Madrid.png') }}" alt="Imagen 3" />
+      <img src="{{ url_for('static', filename='css/Madrid.png') }}" alt="Imagen 1" />
       <div class="texto-cards">
         <h3>Madrid</h3>
       </div>
     </div>
+    <div class="cards">
+      <img src="{{ url_for('static', filename='css/Buenos_Aires.jpg') }}" alt="Imagen 2" />
+      <div class="texto-cards">
+        <h3>Buenos Aires</h3>
+      </div>
+    </div>
+    <div class="cards">
+      <img src="{{ url_for('static', filename='css/Miami.png') }}" alt="Imagen 3" />
+      <div class="texto-cards">
+        <h3>Miami</h3>
+      </div>
+    </div>
   </div>
 </section>
+
 <section>
   <h2>Vuelos por el País...</h2>
   <div class="fila-cards">
@@ -79,4 +82,14 @@
     </div>
   </div>
 </section>
+<section>
+  <h2>Ver la Base de Datos de Vuelos</h2>
+  <a href="{{ url_for('busqueda.ver_vuelos') }}">
+    <div class="container">
+    <button class="button">Ver Vuelos</button>
+    </div>
+  </a>
+  <br>
+</section>
+
 {% endblock %}

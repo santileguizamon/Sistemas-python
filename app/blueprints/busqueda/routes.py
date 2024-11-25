@@ -3,6 +3,7 @@ from datetime import datetime
 import sqlite3
 import random
 import requests
+from app.db.conexion import conectar
 
 
 from config import HEADERS, JSONBIN_URL
@@ -13,36 +14,31 @@ def conectar():
 busqueda_bp = Blueprint('busqueda',__name__,url_prefix='/busqueda')
 
 
-
-@busqueda_bp.route('/index')
-def  index():
+@busqueda_bp.route('/index', methods=['GET', 'POST'])
+def index():
     return render_template('busqueda/index.html')
+
 
 @busqueda_bp.route('/indexUsuarioAdministrador')
 def  indexUsuarioAdministrador():
     return render_template('busqueda/indexUsuarioAdministrador.html')
 
+
 @busqueda_bp.route('/indexHotel')
 def   indexHotel():
     return render_template('busqueda/indexHotel.html')
 
-@busqueda_bp.route('/buscadorVuelo', methods = ['POST'])
-def  buscadorVuelo():
-     return render_template('busqueda/buscadorVuelo.html')
 
-
-@busqueda_bp.route('/buscadorVuelo',methods=['GET','POST'])
-def buscadorVueloSection():
+@busqueda_bp.route('/buscadorVuelo', methods=['GET', 'POST'])
+def buscadorVuelo():
     origen = request.form.get('origen', '').strip()
     destino = request.form.get('destino', '').strip()
     fecha_ida = request.form.get('fecha-ida', '')
     fecha_vuelta = request.form.get('fecha-vuelta', '')
 
-    
     conexion = conectar()
     cursor = conexion.cursor()
 
-  
     query = '''
     SELECT nombre_avion, horario_salida, horario_llegada, precio
     FROM vuelos
@@ -66,15 +62,13 @@ def buscadorVueloSection():
         query += " AND DATE(horario_llegada) = ?"
         params.append(fecha_vuelta)
 
-
     cursor.execute(query, params)
     vuelos = cursor.fetchall()
 
     conexion.close()
 
-    return render_template('busqueda.buscadorVuelo', vuelos=vuelos)
+    return render_template('busqueda/buscadorVuelo.html', vuelos=vuelos)
 
-    
 
 @busqueda_bp.route('/buscadorHotel', methods=['GET','POST'])
 def buscadorHotel():
@@ -113,6 +107,7 @@ def buscarVuelo():
         error_message = f'Error: {response.status_code} - {response.text}'
         return render_template('busqueda/buscarVuelo.html', error=error_message)
 
+
 @busqueda_bp.route('/buscarHotel')
 def buscarHotel():
     API_KEY = 'fb111263230578555f787dca0c591a8fe89e1aeb0665edde45daf8b3f29e8250'
@@ -140,6 +135,7 @@ def buscarHotel():
 
     return render_template('busqueda/buscarHotel.html', hotels=hotels)
 
+
 @busqueda_bp.route('/buscar_Precios_de_Vuelos')
 def buscar_Precios_de_Vuelos():
 
@@ -160,6 +156,7 @@ def buscar_Precios_de_Vuelos():
         return render_template('busqueda/buscar_Precios_de_Vuelos.html', price_insights={})
 
     return render_template('busqueda/buscar_Precios_de_Vuelos.html', price_insights=price_insights)
+
 
 @busqueda_bp.route('/buscar_Precios_de_Hoteles')
 def buscar_Precios_de_Hoteles():
@@ -184,3 +181,31 @@ def buscar_Precios_de_Hoteles():
     hotels = results.get('properties', [])
     
     return render_template('busqueda/buscar_Precios_de_Hoteles.html', hotels=hotels)
+
+@busqueda_bp.route('/ver_vuelos')
+def ver_vuelos():
+    conexion = conectar()
+    cursor = conexion.cursor()
+    
+    # Consulta para obtener todos los vuelos
+    cursor.execute('SELECT * FROM vuelos')
+    vuelos = cursor.fetchall()
+    
+    conexion.close()
+    
+    # Renderiza la plantilla y pasa los vuelos a la vista
+    return render_template('busqueda/ver_vuelos.html', vuelos=vuelos)
+
+@busqueda_bp.route('/ver_hoteles', methods=['GET'])
+def ver_hoteles():
+    conexion = conectar()
+    cursor = conexion.cursor()
+
+    # Consulta para obtener todos los hoteles
+    cursor.execute('SELECT nombre, descripcion, habitaciones FROM hoteles')
+    hoteles = cursor.fetchall()
+
+    conexion.close()
+
+    # Renderizar plantilla con los hoteles obtenidos
+    return render_template('busqueda/ver_hoteles.html', hoteles=hoteles)

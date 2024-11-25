@@ -37,6 +37,7 @@ button {
 
 button:hover {
     background-color: #0056b3;
+    text-align: center;
 }
 
 input, select {
@@ -55,4 +56,3 @@ footer {
     width: 100%;
     bottom: 0;
 }
-
