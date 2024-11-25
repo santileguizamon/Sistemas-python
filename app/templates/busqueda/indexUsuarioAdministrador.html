@@ -7,27 +7,29 @@
     <title>Mockup Usuario Administrador</title>
 </head>
 <body>
-    
     <div class="container">
         <header>
-        <h1>Bienvenidos</h1>
+            <h1>Bienvenidos</h1>
+                <form action="{{ url_for('auth.signIn') }}" method="POST">
+                    <button type="submit" class="logout-button">Cerrar Sesión</button>
+                </form>
         </header>  
 
         <p>Escoja una opción para seguir con el proceso</p>
 
-        <button><a href="{{url_for('detalle.Lista_de_Usuarios')}}">Lista de Usuarios</a></button>
-        <button><a href="{{url_for('detalle.Vuelos')}}">Vuelos</a></button>
-        <button><a href="{{url_for('detalle.Hoteles')}}">Hoteles</a></button>
-        <button><a href="{{url_for('detalle.Precios_de_Vuelos')}}">Precios de Vuelos</a></button>
-        <button><a href="{{url_for('detalle.Precios_de_Hoteles')}}">Precios de Hoteles</a></button> 
-    
+        <button><a href="{{ url_for('detalle.Lista_de_Usuarios') }}">Lista de Usuarios</a></button>
+        <button><a href="{{ url_for('detalle.Vuelos') }}">Vuelos</a></button>
+        <button><a href="{{ url_for('detalle.Hoteles') }}">Hoteles</a></button>
+        <button><a href="{{ url_for('detalle.Precios_de_Vuelos') }}">Precios de Vuelos</a></button>
+        <button><a href="{{ url_for('detalle.Precios_de_Hoteles') }}">Precios de Hoteles</a></button> 
     </div>
 
+
     <br><br>
+
 
     <footer>
         <p>© 2024 Mi aplicación Flask</p>
     </footer>
-
 </body>
 </html>

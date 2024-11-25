@@ -193,7 +193,6 @@ def ver_vuelos():
     
     conexion.close()
     
-    # Renderiza la plantilla y pasa los vuelos a la vista
     return render_template('busqueda/ver_vuelos.html', vuelos=vuelos)
 
 @busqueda_bp.route('/ver_hoteles', methods=['GET'])
