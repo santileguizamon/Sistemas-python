@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>Lista Usuarios</title>
-</head>
-<body>
-    <div class="container">
-        <header>
-        <h1>Lista de Usuarios</h1>
-        </header>
+{% extends 'layout.html' %}
+{% block title %}Lista de usuarios{% endblock %}
+{% block content %}
 
-        <br><br>
 
-        </button> <button><a href="/detalle/users"> Ver Usuarios</a></button>
+    <section class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="container bg-white shadow p-4 rounded">
+            <div class="text-center mb-4">
+                <h1 class="fw-bold">Lista de Usuarios</h1>
+            </div>
 
-        <button><a href="/busqueda/indexUsuarioAdministrador">Regresar al Inicio</a></button>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="/detalle/users" class="btn btn-primary btn-lg">Ver Usuarios</a>
+                <a href="/busqueda/indexUsuarioAdministrador" class="btn btn-secondary btn-lg">Regresar al Inicio</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}   
 
-    </div>
-
-    <footer>
-        <p>© 2024 Mi aplicación Flask</p>
-    </footer>
-
-</body>
-</html>
+  

@@ -3,6 +3,7 @@ from app.db.conexion import conectar
 def crear_tablas(conexion):
     cursor = conexion.cursor()
 
+
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS lugares (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

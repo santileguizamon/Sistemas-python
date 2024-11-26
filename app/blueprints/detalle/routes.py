@@ -10,14 +10,47 @@ from config import HEADERS, JSONBIN_URL
 
 detalle_bp = Blueprint('detalle',__name__,url_prefix='/detalle')
 
-@detalle_bp.route('/compraVuelo')
-def compraVuelo():
-    return render_template('detalle/compraVuelo.html')
+@detalle_bp.route('/compraVuelo/<int:vuelo_id>', methods=['GET'])
+def compraVuelo(vuelo_id):
 
-@detalle_bp.route('/detalleHotel')
-def  detalleHotel():
+    conexion = conectar()
+    cursor = conexion.cursor()
 
-    return render_template('detalle/detalleHotel')
+    query = '''
+    SELECT v.id, v.origen, v.destino, v.fecha_salida, v.horario_salida, v.horario_llegada, v.precio
+    FROM vuelos v
+    WHERE v.id = ?
+    '''
+    cursor.execute(query, (vuelo_id,))
+    vuelo = cursor.fetchone()
+
+    conexion.close()
+
+    if not vuelo:
+        return render_template('detalle/error.html', mensaje="El vuelo no existe o ya no está disponible.")
+
+    return render_template('detalle/compraVuelo.html', vuelo=vuelo)
+
+@detalle_bp.route('/detalleHotel/<int:hotel_id>', methods=['GET'])
+def detalleHotel(hotel_id):
+
+    conexion = conectar()
+    cursor = conexion.cursor()
+
+    query = '''
+    SELECT h.id, h.nombre, h.lugar, h.descripcion, h.precio_por_noche, h.habitaciones_disponibles, h.imagen
+    FROM hoteles h
+    WHERE h.id = ?
+    '''
+    cursor.execute(query, (hotel_id,))
+    hotel = cursor.fetchone()
+
+    conexion.close()
+
+    if not hotel:
+        return render_template('detalle/error.html', mensaje="El hotel no existe o ya no está disponible.")
+
+    return render_template('detalle/detalleHotel.html', hotel=hotel)
 
 @detalle_bp.route('/users')
 def users():
