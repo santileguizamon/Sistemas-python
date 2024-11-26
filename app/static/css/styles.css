@@ -52,7 +52,65 @@ footer {
     background-color: #f1f1f1;
     text-align: center;
     padding: 1px;
-    position: fixed;
+   
     width: 100%;
     bottom: 0;
 }
+
+.navbar {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 1rem 2rem; 
+    background-color: #72a4ea; 
+    color: white; 
+}
+.logo {
+    display: flex; 
+    align-items: center; 
+}
+.logo img {
+    width: 40px; 
+    height: auto; 
+    margin-right: 0.5rem; 
+}
+.nav-links ul {
+    list-style: none; 
+    margin: 0; 
+    display: flex; 
+    padding: 0; 
+}
+.nav-links li {
+    margin: 0 1rem; 
+}
+.nav-links a {
+    color: white; 
+    text-decoration: none; 
+    font-weight: bold; 
+}
+.nav-links a:hover {
+    text-decoration: underline; 
+}
+.logout-button {
+    background-color: #ffffff; 
+    color: #007bff; 
+    border: none; 
+    border-radius: 0.5rem; 
+    padding: 0.5rem 1rem; 
+    cursor: pointer; 
+}
+.logout-button:hover {
+    background-color: #e0e0e0; 
+}
+.hotel-image {
+    width: 450px; 
+    height: auto; 
+    object-fit: cover; 
+    border-radius: 8px;
+}
+.hotel-image {
+    width: 450px;
+    height: 300px;
+    object-fit: cover;
+}
+

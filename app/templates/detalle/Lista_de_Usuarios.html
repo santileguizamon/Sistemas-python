@@ -7,16 +7,37 @@
     <title>Lista Usuarios</title>
 </head>
 <body>
+    <header class="navbar">
+        <div class="logo">
+        <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+        <span>Travel Ease</span>
+        </div>
+    </header>
+
     <div class="container">
         <header>
         <h1>Lista de Usuarios</h1>
         </header>
-
+        
         <br><br>
 
-        </button> <button><a href="/detalle/users"> Ver Usuarios</a></button>
+        <section>
+            <div>
+               <a href="{{ url_for('detalle.users') }}" method="GET">
+                    <button type="button">Ver Usuarios</button>
+                </a>
+            </div>
+        </section>
 
-        <button><a href="/busqueda/indexUsuarioAdministrador">Regresar al Inicio</a></button>
+        <br>
+
+        <section>
+            <div>
+               <a href="{{ url_for('busqueda.indexUsuarioAdministrador') }}" method="GET">
+                    <button type="button">Volver</button>
+                </a>
+            </div>
+        </section>
 
     </div>
 

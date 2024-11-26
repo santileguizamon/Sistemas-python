@@ -7,9 +7,19 @@
     <title>Precios de Vuelos</title>
 </head>
 <body>
-    <header>
-    <h1>Historial de Precios de Vuelos</h1>
+
+    <header class="navbar">
+        <div class="logo">
+        <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+        <span>Travel Ease</span>
+        </div>
     </header>
+
+    <div class="container">
+        <header>
+        <h1>Historial Precios de Vuelos</h1>
+        </header>
+    </div>
 
     {% if price_insights %}
         <p>Precio más bajo: {{ price_insights.lowest_price }} EUR</p>
@@ -37,7 +47,13 @@
 
     <br><br>
     
-    <button><a href="{{url_for('detalle.Precios_de_Vuelos')}}">Volver</a></button>
+    <section>
+        <div>
+           <a href="{{ url_for('detalle.Precios_de_Vuelos') }}" method="GET">
+                <button type="button">Volver</button>
+            </a>
+        </div>
+    </section>
 
     <footer>
         <p>© 2024 Mi aplicación Flask</p>

@@ -7,9 +7,18 @@
     <title>Usuarios</title>
 </head>
 <body>
-    <header>
-    <h1>Usuarios</h1>
+    <header class="navbar">
+        <div class="logo">
+        <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+        <span>Travel Ease</span>
+        </div>
     </header>
+
+    <div class="container">
+        <header>
+        <h1>Usuarios</h1>
+        </header>
+    </div>
 
     <br><br>
 
@@ -23,9 +32,16 @@
     <p>Celular: {{infoPersona.celular}}</p>
     
 
-    <br><br>
+    <br>
+    <section>
+        <div>
+           <a href="{{ url_for('detalle.Lista_de_Usuarios') }}" method="GET">
+                <button type="button">Volver</button>
+            </a>
+        </div>
+    </section>
 
-    <button><a href="/detalle/Lista_de_Usuarios">Volver</a></button>
+    <br><br>
 
     <footer>
         <p>© 2024 Mi aplicación Flask</p>

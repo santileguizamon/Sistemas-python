@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <title>Crear Vuelo</title>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca">
+      <span>Travel Ease</span>
+    </div>
+  </header>
+
+  
+  <div class="container">
+    <header>
+      <h1>Crear Vuelos</h1>
+    </header>
+  </div>
+  
+  <br>
+
+</body>
+</html><form method="POST">
+    <input type="text" name="origen" placeholder="Origen" required>
+    <input type="text" name="destino" placeholder="Destino" required>
+    <input type="date" name="fecha_ida" required>
+    <input type="date" name="fecha_vuelta" required>
+    <input type="time" name="horario_salida" required>
+    <input type="time" name="horario_llegada" required>
+    <input type="number" name="pasajeros" placeholder="Pasajeros" required>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+  
+  <br>
+  
+  <section>
+    <div>
+       <a href="{{ url_for('busqueda.ver_vuelos') }}" method="GET">
+            <button type="button">Volver</button>
+        </a>
+    </div>
+</section>
+
+<br><br>
+    
+    <footer>
+        <p>© 2024 Mi aplicación Flask</p>
+    </footer>
+
+</body>
+</html>

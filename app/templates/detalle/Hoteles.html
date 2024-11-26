@@ -7,6 +7,12 @@
     <title>ABM Usuarios</title>
 </head>
 <body>
+    <header class="navbar">
+        <div class="logo">
+        <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+        <span>Travel Ease</span>
+        </div>
+    </header>
     <div class="container">
         <header>
             <h1>Hoteles</h1>
@@ -14,9 +20,23 @@
 
             <br><br>
 
-        <button><a href="/busqueda/buscarHotel">Buscar Hotel</a></button>
+            <section>
+                <div>
+                   <a href="{{ url_for('busqueda.buscarHotel') }}" method="GET">
+                        <button type="button">Buscar Hotel</button>
+                    </a>
+                </div>
+            </section>
 
-        <button><a href="/busqueda/indexUsuarioAdministrador">Regresar al Inicio</a></button>
+            <br>
+
+            <section>
+                <div>
+                   <a href="{{ url_for('busqueda.indexUsuarioAdministrador') }}" method="GET">
+                        <button type="button">Volver</button>
+                    </a>
+                </div>
+            </section>
 
         <br><br>
 
@@ -24,14 +44,16 @@
         
     </div>
 
+    <br>
     <section>
-        <h2>Ver la Base de Datos de Hoteles</h2>
         <div class="container">
            <a href="{{ url_for('busqueda.ver_hoteles') }}" method="GET">
                 <button type="button">Ver Hoteles</button>
             </a>
         </div>
     </section>
+
+    <br><br>
 
     <footer>
         <p>© 2024 Mi aplicación Flask</p>

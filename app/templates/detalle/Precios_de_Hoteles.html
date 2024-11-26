@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>ABM Usuarios</title>
 </head>
+<header class="navbar">
+    <div class="logo">
+    <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+    <span>Travel Ease</span>
+    </div>
+</header>
 <body>
     <div class="container">
             <header>
@@ -14,9 +20,23 @@
 
                 <br><br>
 
-                <button><a href="/busqueda/buscar_Precios_de_Hoteles">Buscar Precio de Hoteles</a></button>
+                <section>
+                    <div>
+                       <a href="{{ url_for('busqueda.buscar_Precios_de_Hoteles') }}" method="GET">
+                            <button type="button">Buscar Precios de Hoteles</button>
+                        </a>
+                    </div>
+                </section>
 
-                <button><a href="/busqueda/indexUsuarioAdministrador">Regresar al Inicio</a></button>
+                <br>
+
+                <section>
+                    <div>
+                       <a href="{{ url_for('busqueda.indexUsuarioAdministrador') }}" method="GET">
+                            <button type="button">Volver</button>
+                        </a>
+                    </div>
+                </section>
 
         <br><br>
 

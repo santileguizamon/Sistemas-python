@@ -7,21 +7,37 @@
     <title>Precios de Hoteles</title>
 </head>
 <body>
-    <header>
-    <h1>Resultados de la Búsqueda de Hoteles</h1>
-    <button><a href="{{url_for('detalle.Precios_de_Hoteles')}}">Volver</a></button>
+    <header class="navbar">
+        <div class="logo">
+        <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+        <span>Travel Ease</span>
+        </div>
     </header>
+
+    <div class="container">
+        <header>
+        <h1>Resultados de la Búsqueda de Precios de Hoteles</h1>
+        </header>
+    </div>
+    
     {% for hotel in hotels %}
         <div class="hotel">
             <h2>{{ hotel.name }}</h2>
-            <img src="{{ hotel.images[0].original_image }}" alt="{{ hotel.name }}">
+            <img src="{{ hotel.images[0].original_image }}" alt="{{ hotel.name }}" class="hotel-image">
             <p>Precio por Noche: {{ hotel.rate_per_night.lowest }} </p>
-            <p>Precio sin Impuestos : {{ hotel.rate_per_night.before_taxes_fees }}</p>
             
         </div>
     {% else %}
         <p>No se encontraron Hoteles</p>
     {% endfor %}
+
+    <section>
+        <div>
+           <a href="{{ url_for('detalle.Precios_de_Hoteles') }}" method="GET">
+                <button type="button">Volver</button>
+            </a>
+        </div>
+    </section>
 
     <footer>
         <p>© 2024 Mi aplicación Flask</p>

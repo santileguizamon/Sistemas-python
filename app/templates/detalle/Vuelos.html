@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>ABM Usuarios</title>
 </head>
+<header class="navbar">
+    <div class="logo">
+    <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+    <span>Travel Ease</span>
+    </div>
+</header>
 <body>
     <div class="container">
         <header>
@@ -14,9 +20,23 @@
 
             <br>
 
-            <button><a href="/busqueda/buscarVuelo">Buscar Vuelo</a></button>
+            <section>
+                <div>
+                   <a href="{{ url_for('busqueda.buscarVuelo') }}" method="GET">
+                        <button type="button">Buscar Vuelos</button>
+                    </a>
+                </div>
+            </section>
+
+            <br>
         
-            <button><a href="/busqueda/indexUsuarioAdministrador">Regresar al Inicio</a></button>
+            <section>
+                <div>
+                   <a href="{{ url_for('busqueda.indexUsuarioAdministrador') }}" method="GET">
+                        <button type="button">Volver</button>
+                    </a>
+                </div>
+            </section>
 
             <br><br>
 
@@ -25,16 +45,17 @@
 
     </div>
 
+    <br>
     <section>
-        <h2>Ver la Base de Datos de Vuelos</h2>
-        <a href="{{ url_for('busqueda.ver_vuelos') }}">
-          <div class="container">
-              <button class="button">Ver Vuelos</button>
-          </div>
-        </a>
-        <br>
+        <div class="container">
+           <a href="{{ url_for('busqueda.ver_vuelos') }}" method="GET">
+                <button type="button">Ver Vuelos</button>
+            </a>
+        </div>
     </section>
 
+    <br><br>
+    
     <footer>
         <p>© 2024 Mi aplicación Flask</p>
     </footer>

@@ -3,30 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
     <title>Mockup Usuario Administrador</title>
 </head>
+<header class="navbar">
+    <div class="logo">
+    <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+    <span>Travel Ease</span>
+    </div>
+    <form action="{{ url_for('auth.signIn') }}" method="POST">
+        <button type="submit" class="logout-button">Cerrar Sesión</button>
+    </form>
+  </header>
 <body>
     <div class="container">
         <header>
             <h1>Bienvenidos</h1>
-                <form action="{{ url_for('auth.signIn') }}" method="POST">
-                    <button type="submit" class="logout-button">Cerrar Sesión</button>
-                </form>
         </header>  
 
         <p>Escoja una opción para seguir con el proceso</p>
 
-        <button><a href="{{ url_for('detalle.Lista_de_Usuarios') }}">Lista de Usuarios</a></button>
-        <button><a href="{{ url_for('detalle.Vuelos') }}">Vuelos</a></button>
-        <button><a href="{{ url_for('detalle.Hoteles') }}">Hoteles</a></button>
-        <button><a href="{{ url_for('detalle.Precios_de_Vuelos') }}">Precios de Vuelos</a></button>
-        <button><a href="{{ url_for('detalle.Precios_de_Hoteles') }}">Precios de Hoteles</a></button> 
+        <section>
+            <div>
+               <a href="{{ url_for('detalle.Lista_de_Usuarios') }}" method="GET">
+                    <button type="button">Lista de Usuarios</button>
+                </a>
+            </div>
+        </section>
+
+        <br>
+
+        <section>
+            <div>
+               <a href="{{ url_for('detalle.Vuelos') }}" method="GET">
+                    <button type="button">Vuelos</button>
+                </a>
+            </div>
+        </section>
+
+        <br>
+
+        <section>
+        <div>
+           <a href="{{ url_for('detalle.Hoteles') }}" method="GET">
+                <button type="button">Hoteles</button>
+            </a>
+        </div>
+    </section>
+
+    <br>
+
+    <section>
+        <div>
+           <a href="{{ url_for('detalle.Precios_de_Vuelos') }}" method="GET">
+                <button type="button">Precios de Vuelos</button>
+            </a>
+        </div>
+    </section>
+
+    <br>
+
+    <section>
+        <div>
+           <a href="{{ url_for('detalle.Precios_de_Hoteles') }}" method="GET">
+                <button type="button">Precios de Hoteles</button>
+            </a>
+        </div>
+    </section>
+
+    <br>
+    
     </div>
 
-
     <br><br>
-
 
     <footer>
         <p>© 2024 Mi aplicación Flask</p>

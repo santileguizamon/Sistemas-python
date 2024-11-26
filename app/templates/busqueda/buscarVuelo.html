@@ -7,9 +7,18 @@
     <title>Buscar Vuelo</title>
 </head>
 <body>
-    <header>
-    <h1>Resultados de la Búsqueda de Vuelos</h1>
+    <header class="navbar">
+        <div class="logo">
+        <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+        <span>Travel Ease</span>
+        </div>
     </header>
+
+    <div class="container">
+        <header>
+        <h1>Resultados de la Búsqueda de Vuelos</h1>
+        </header>
+    </div>
 
     <h2>Buscando vuelos de {{ departure_id }} a {{ arrival_id }}</h2>
 
@@ -32,10 +41,15 @@
         <p>No se encontraron vuelos.</p>
     {% endif %}
 
-    <button><a href="{{url_for('detalle.Vuelos')}}">Volver</a></button>
+    <section>
+        <div>
+           <a href="{{ url_for('detalle.Vuelos') }}" method="GET">
+                <button type="button">Volver</button>
+            </a>
+        </div>
+    </section>
     
-    <br><br><br>
-
+    <br><br>
     
     <footer>
         <p>© 2024 Mi aplicación Flask</p>

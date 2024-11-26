@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template,url_for,request,redirect
 from flask import Flask, jsonify
 from datetime import datetime
-#from serpapi import GoogleSearch
 import os
 import random
 import requests

@@ -8,7 +8,12 @@
     <title>ver_hoteles</title>
 </head>
 <body>
-    
+    <header class="navbar">
+        <div class="logo">
+        <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+        <span>Travel Ease</span>
+        </div>
+      </header>
 </body>
 </html>
 <section>
@@ -33,10 +38,21 @@
     </tbody>
 </table>
 </section>
-<a href="{{ url_for('busqueda.indexUsuarioAdministrador') }}">
-    <div class="container">
-    <button class="button">Volver al Inicio</button>
-    </div>
-  </a>
-<br>
 
+<br>
+    <section>
+        <div class="container">
+           <a href="{{ url_for('busqueda.indexUsuarioAdministrador') }}" method="GET">
+                <button type="button">Volver al Inicio</button>
+            </a>
+        </div>
+    </section>
+
+    <br><br>
+    
+    <footer>
+        <p>© 2024 Mi aplicación Flask</p>
+    </footer>
+
+</body>
+</html>

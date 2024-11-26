@@ -8,10 +8,9 @@ def signIn():
         email = request.form.get('email')
         contraseña = request.form.get('contraseña')
 
-        # Verifica si las credenciales son de administrador
         if email == 'admin@example.com' and contraseña == 'admin123':
             return redirect(url_for('busqueda.indexUsuarioAdministrador'))
-        # Verifica si las credenciales son de usuario normal
+    
         elif email == 'usuario@example.com' and contraseña == 'contraseña123':
             return redirect(url_for('busqueda.index'))
         else:
