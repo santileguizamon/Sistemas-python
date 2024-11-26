@@ -8,7 +8,7 @@ from config import HEADERS, JSONBIN_URL
 
 
 from config import HEADERS, JSONBIN_URL
-from decorador.decorators import admin_required
+
 
 def conectar():
     return sqlite3.connect('agencia_viajes.db')
@@ -22,7 +22,6 @@ def index():
 
 
 @busqueda_bp.route('/indexUsuarioAdministrador')
-@admin_required
 def  indexUsuarioAdministrador():
     return render_template('busqueda/indexUsuarioAdministrador.html')
 
@@ -114,7 +113,7 @@ def buscadorHotel():
 
 @busqueda_bp.route('/buscarVuelo', methods=['GET','POST'])
 def buscarVuelo():
-    API_KEY = 'fb111263230578555f787dca0c591a8fe89e1aeb0665edde45daf8b3f29e8250'
+    API_KEY = 'feea122bafbb43aa26a1e19e957c5a558392c4be1d498f7c8b89a7d911648c5b'
     url = 'https://serpapi.com/search.json'
 
     departure_airports = ['PEK', 'LAX', 'JFK', 'ORD', 'SFO']
@@ -127,8 +126,8 @@ def buscarVuelo():
         'engine': 'google_flights',
         'departure_id': departure_id, 
         'arrival_id': arrival_id,    
-        'outbound_date': '2024-10-29',
-        'return_date': '2024-10-30',
+        'outbound_date': '2024-11-26',
+        'return_date': '2025-11-30',
         'currency': 'USD',
         'hl': 'en',
         'api_key': API_KEY
@@ -160,8 +159,8 @@ def buscarHotel():
     params = {
         "engine": "google_hotels",
         "q": "Bali Resorts",
-        "check_in_date": "2024-10-29",
-        "check_out_date": "2024-10-30",
+        "check_in_date": "2024-11-29",
+        "check_out_date": "2025-11-30",
         "adults": 2,
         "currency": "USD",
         "gl": "us",
@@ -177,15 +176,9 @@ def buscarHotel():
     results = response.json()
     hotels = results.get('properties', [])
 
-        return render_template('busqueda/buscarHotel.html', hotels=hotels)
-
-   
- 
-
-
+    return render_template('busqueda/buscarHotel.html', hotels=hotels)
 
 @busqueda_bp.route('/buscar_Precios_de_Vuelos')
-@admin_required
 def buscar_Precios_de_Vuelos():
 
     price_insights = {
@@ -208,7 +201,6 @@ def buscar_Precios_de_Vuelos():
 
 
 @busqueda_bp.route('/buscar_Precios_de_Hoteles')
-@admin_required
 def buscar_Precios_de_Hoteles():
     API_KEY = 'fb111263230578555f787dca0c591a8fe89e1aeb0665edde45daf8b3f29e8250'
     url = 'https://serpapi.com/search.json'
@@ -303,12 +295,10 @@ def eliminar_vuelo(id):
     return redirect(url_for('busqueda.ver_vuelos'))
 
 @busqueda_bp.route('/ver_vuelos')
-@admin_required
 def ver_vuelos():
     conexion = conectar()
     cursor = conexion.cursor()
     
-    # Consulta para obtener todos los vuelos
     cursor.execute('SELECT * FROM vuelos')
     vuelos = cursor.fetchall()
 
@@ -317,16 +307,88 @@ def ver_vuelos():
     return render_template('busqueda/ver_vuelos.html', vuelos=vuelos)
 
 
-@busqueda_bp.route('/ver_hoteles', methods=['GET'])
-@admin_required
-def ver_hoteles():
+@busqueda_bp.route('/crear_hotel', methods=['GET', 'POST'])
+def crear_hotel():
+    if request.method == 'POST':
+        nombre = request.form.get('nombre', '').strip()
+        descripcion = request.form.get('descripcion', '').strip()
+        habitaciones = request.form.get('habitaciones', '').strip()
+
+        if not nombre or not descripcion or not habitaciones:
+            flash('Todos los campos son obligatorios.')
+            return redirect(url_for('busqueda.crear_hotel'))
+
+        # Verifica que el número de habitaciones sea un valor válido
+        try:
+            habitaciones = int(habitaciones)
+        except ValueError:
+            flash('El número de habitaciones debe ser un número entero.')
+            return redirect(url_for('busqueda.crear_hotel'))
+
+        # Inserta en la base de datos
+        conexion = conectar()
+        cursor = conexion.cursor()
+        cursor.execute("""
+            INSERT INTO hoteles (nombre, descripcion, habitaciones)
+            VALUES (?, ?, ?)
+        """, (nombre, descripcion, habitaciones))
+        conexion.commit()
+        conexion.close()
+
+        flash('Hotel creado con éxito')
+        return redirect(url_for('busqueda.ver_hoteles'))
+
+    return render_template('busqueda/crear_hotel.html')
+
+
+
+@busqueda_bp.route('/editar_hotel/<int:id>', methods=['GET', 'POST'])
+def editar_hotel(id):
     conexion = conectar()
     cursor = conexion.cursor()
 
-    cursor.execute('SELECT nombre, descripcion, habitaciones FROM hoteles')
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        descripcion = request.form['descripcion']
+        habitaciones = request.form['habitaciones']
+
+        cursor.execute("""
+            UPDATE hoteles
+            SET nombre = ?, descripcion = ?, habitaciones = ?
+            WHERE id = ?
+        """, (nombre, descripcion, habitaciones, id))
+        conexion.commit()
+        conexion.close()
+
+        flash('Hotel actualizado con éxito')
+        return redirect(url_for('busqueda.ver_hoteles'))
+    else:
+        cursor.execute("SELECT * FROM hoteles WHERE id = ?", (id,))
+        hotel = cursor.fetchone()
+        conexion.close()
+
+        return render_template('busqueda/editar_hotel.html', hotel=hotel)
+
+
+@busqueda_bp.route('/eliminar_hotel/<int:id>', methods=['GET'])
+def eliminar_hotel(id):
+    conexion = conectar()
+    cursor = conexion.cursor()
+    cursor.execute("DELETE FROM hoteles WHERE id = ?", (id,))
+    conexion.commit()
+    conexion.close()
+
+    flash('Hotel eliminado con éxito')
+    return redirect(url_for('busqueda.ver_hoteles'))
+
+@busqueda_bp.route('/ver_hoteles')
+def ver_hoteles():
+    conexion = conectar()
+    cursor = conexion.cursor()
+    
+    cursor.execute('SELECT * FROM hoteles')
     hoteles = cursor.fetchall()
 
     conexion.close()
-
-    # Renderizar plantilla con los hoteles obtenidos
+    
     return render_template('busqueda/ver_hoteles.html', hoteles=hoteles)

@@ -13,19 +13,30 @@
         </header>
 
         <br><br>
-
-        </button> <button><a href="/detalle/users"> Ver Usuarios</a></button>
-
-        <button><a href="/busqueda/indexUsuarioAdministrador">Regresar al Inicio</a></button>
-
-    </div>
-
-            <div class="d-flex justify-content-center gap-3">
-                <a href="/detalle/users" class="btn btn-primary btn-lg">Ver Usuarios</a>
-                <a href="/busqueda/indexUsuarioAdministrador" class="btn btn-secondary btn-lg">Regresar al Inicio</a>
+        <section>
+            <div>
+               <a href="{{ url_for('detalle.users') }}" method="GET">
+            <button type="button">Ver Usuarios</button>
+                </a>
             </div>
-        </div>
+        </section>
+
+        <br>
+
+        <section>
+            <div>
+               <a href="{{ url_for('busqueda.indexUsuarioAdministrador') }}" method="GET">
+                    <button type="button">Volver</button>
+                </a>
+            </div>
+        </section>
+
+        <br><br>
     </section>
-{% endblock %}   
+    <footer>
+            © 2024 Agencia de Viajes. Todos los derechos reservados.
+        </footer>
+</body>
+</html>
 
   

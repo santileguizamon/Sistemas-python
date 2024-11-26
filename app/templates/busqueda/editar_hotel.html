@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Editar Hotel</title>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+          <span>Travel Ease</span>
+        </div>
+      </header>
+    
+      <div class="container">
+        <header>
+          <h1>Editar Hotel</h1>
+        </header>
+      </div>
+
+      <br>
+
+    <form method="POST">
+        <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" value="{{ hotel[1] }}" required>
+        </div>
+        <br>
+        <div>
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" required>{{ hotel[2] }}</textarea>
+        </div>
+        <br>
+        <div>
+            <label for="habitaciones">habitaciones</label>
+            <textarea id="habitaciones" name="habitaciones" required>{{ hotel[3] }}</textarea>
+        </div>
+        <br>
+        <button type="submit">Actualizar Hotel</button>
+    </form>
+
+    <br>
+
+    <footer>
+        © 2024 Agencia de Viajes. Todos los derechos reservados.
+    </footer>
+</body>
+</html>

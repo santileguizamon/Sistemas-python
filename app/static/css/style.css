@@ -1,6 +1,9 @@
-*{
-    padding: 0;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
+    padding: 25px;
+    text-align: center;
 }
 .containerFormulario {
     max-width: 80%; 
@@ -426,7 +429,6 @@ footer {
     background-color: #f1f1f1;
     text-align: center;
     padding: 1px;
-    position: fixed;
     width: 100%;
     bottom: 0;
 }
@@ -438,3 +440,6 @@ input[type="text"], input[type="date"], input[type="time"], input[type="number"]
     max-width: 400px; 
     margin: 0 auto; 
   }
+main {
+    flex-grow: 1;
+}

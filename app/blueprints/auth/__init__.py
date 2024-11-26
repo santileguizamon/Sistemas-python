@@ -2,7 +2,6 @@ from flask import Flask, flash, redirect, render_template, request, url_for
 from app.blueprints.auth.routes import auth_bp
 from app.blueprints.busqueda.routes import busqueda_bp
 from app.blueprints.detalle.routes import detalle_bp
-from models.user import User
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
