@@ -4,57 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>Buscar Vuelo</title>
+    <title>Buscar Vuelos</title>
 </head>
 <body>
     <header class="navbar">
         <div class="logo">
-        <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
-        <span>Travel Ease</span>
+            <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+            <span>Travel Ease</span>
         </div>
     </header>
 
     <div class="container">
         <header>
-        <h1>Resultados de la Búsqueda de Vuelos</h1>
+            <h1>Buscar Vuelos</h1>
         </header>
-    </div>
 
-    <h2>Buscando vuelos de {{ departure_id }} a {{ arrival_id }}</h2>
+        <br>
 
-    {% if best_flights %}
-        <ul>
-            {% for flight in best_flights %}
+        <form method="POST" action="{{ url_for('busqueda.buscarVuelo') }}">
+            <label for="origen">Origen (Código IATA):</label>
+            <input type="text" id="origen" name="origen" required>
+            <br><br>
+
+            <label for="destino">Destino (Código IATA):</label>
+            <input type="text" id="destino" name="destino" required>
+            <br><br>
+
+            <label for="fecha-ida">Fecha de ida:</label>
+            <input type="date" id="fecha-ida" name="fecha-ida" required>
+            <br><br>
+
+            <label for="fecha-vuelta">Fecha de vuelta:</label>
+            <input type="date" id="fecha-vuelta" name="fecha-vuelta" required>
+            <br><br>
+
+            <button type="submit">Buscar vuelos</button>
+        </form>
+
+        <br>
+
+        {% if vuelos %}
+            <h2>Resultados de vuelos</h2>
+            <ul>
+                {% for vuelo in vuelos %}
                 <li>
-                    <h3>Aerolínea: <img src="{{ flight['airline_logo'] }}" alt="{{ flight['airline'] }}" style="width:30px;"> {{ flight['airline'] }}</h3>
-                    <p>Precio: {{ flight['price'] }} USD</p>
-                    <p>Duración total: {{ flight['total_duration'] // 60 }} horas {{ flight['total_duration'] % 60 }} minutos</p>
-                    <p>Salida: {{ flight['flights'][0]['departure_airport']['name'] }} a las {{ flight['flights'][0]['departure_airport']['time'] }}</p>
-                    <p>Llegada: {{ flight['flights'][-1]['arrival_airport']['name'] }} a las {{ flight['flights'][-1]['arrival_airport']['time'] }}</p>
-                    <p>Escalas: {{ flight['layovers'] | length }}</p>
+                    <strong>Aerolínea:</strong> {{ vuelo['airline'] }}<br>
+                    <strong>Salida:</strong> {{ vuelo['departure'] }}<br>
+                    <strong>Llegada:</strong> {{ vuelo['arrival'] }}<br>
+                    <strong>Precio:</strong> {{ vuelo['price'] }} USD
                 </li>
-            {% endfor %}
-        </ul>
-    {% elif error %}
-        <p>{{ error }}</p>
-    {% else %}
-        <p>No se encontraron vuelos.</p>
-    {% endif %}
+                {% endfor %}
+            </ul>
+        {% elif request.method == 'POST' %}
+            <p>No se encontraron vuelos que coincidan con tu búsqueda.</p>
+        {% endif %}
 
-    <section>
-        <div>
-           <a href="{{ url_for('detalle.Vuelos') }}" method="GET">
-                <button type="button">Volver</button>
-            </a>
-        </div>
-    </section>
-    
-    <br><br>
-    
-    <footer>
+        <section>
+            <div>
+                <a href="{{ url_for('detalle.Vuelos') }}" method="GET">
+                    <button type="button">Volver</button>
+                </a>
+            </div>
+        </section>
+
+        <br>
+
+        <footer>
             © 2024 Agencia de Viajes. Todos los derechos reservados.
         </footer>
-
+    </div>
 </body>
 </html>
-

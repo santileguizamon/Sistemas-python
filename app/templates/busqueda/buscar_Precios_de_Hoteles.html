@@ -19,6 +19,16 @@
         <h1>Resultados de la Búsqueda de Precios de Hoteles</h1>
         </header>
     </div>
+
+    <br>
+    
+    <section>
+        <div>
+           <a href="{{ url_for('detalle.Precios_de_Hoteles') }}" method="GET">
+                <button type="button">Volver</button>
+            </a>
+        </div>
+    </section>
     
     {% for hotel in hotels %}
         <div class="hotel">
@@ -30,14 +40,6 @@
     {% else %}
         <p>No se encontraron Hoteles</p>
     {% endfor %}
-
-    <section>
-        <div>
-           <a href="{{ url_for('detalle.Precios_de_Hoteles') }}" method="GET">
-                <button type="button">Volver</button>
-            </a>
-        </div>
-    </section>
 
     <footer>
         <p>© 2024 Mi aplicación Flask</p>

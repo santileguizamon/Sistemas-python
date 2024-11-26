@@ -4,45 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>Bali Resorts</title>
+    <title>Hoteles en Bali</title>
 </head>
 <body>
     <header class="navbar">
         <div class="logo">
-        <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
-        <span>Travel Ease</span>
+            <img src="{{ url_for('static', filename='css/ruta-del-logo.png') }}" alt="Logo de la Marca" />
+            <span>Travel Ease</span>
         </div>
     </header>
-    <body>
-        <div class="container">
-            <header>
-                <h1>Hoteles</h1>
-                </header>
-    
-                <br>
-    {% for hotel in hotels %}
-        <div class="hotel">
-            <h2>{{ hotel.name }}</h2>
-            <img src="{{ hotel.images[0].original_image }}" alt="{{ hotel.name }}" class="hotel-image">
-            <p>Comodidades: {{ hotel.amenities }} </p>
-            <p>Lugares Cercanos: {{ hotel.nearby_places }}</p>
-            
-        </div>
-    {% else %}
-        <p>No se encontraron Hoteles</p>
-    {% endfor %}
 
-    <section>
-        <div>
-           <a href="{{ url_for('detalle.Hoteles') }}" method="GET">
-                <button type="button">Volver</button>
-            </a>
-        </div>
-    </section>
+    <div class="container">
+        <header>
+            <h1>Buscar Hoteles</h1>
+        </header>
+
+        <br>
+
+        <form action="{{ url_for('busqueda.buscarHotel') }}" method="POST">
+            <label for="ubicacion">Ubicación:</label>
+            <input type="text" id="ubicacion" name="ubicacion" placeholder="Ejemplo: Bali Resorts" required>
+
+            <label for="checkin">Fecha de Check-in:</label>
+            <input type="date" id="checkin" name="checkin" required>
+
+            <label for="checkout">Fecha de Check-out:</label>
+            <input type="date" id="checkout" name="checkout" required>
+
+            <label for="adultos">Número de Adultos:</label>
+            <input type="number" id="adultos" name="adultos" min="1" value="2" required>
+
+            <button type="submit">Buscar Hoteles</button>
+        </form>
+
+        <br>
+        
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+
+        {% if hotels %}
+            {% for hotel in hotels %}
+                <div class="hotel">
+                    <h2>{{ hotel.name }}</h2>
+                    <img src="{{ hotel.images[0].original_image }}" alt="{{ hotel.name }}" class="hotel-image">
+                    <p>Comodidades: {{ hotel.amenities | join(', ') }} </p>
+                    <p>Lugares cercanos: {{ hotel.nearby_places | join(', ') }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+           
+            {% if request.method == 'POST' %}
+                <p>No se encontraron Hoteles</p>
+            {% endif %}
+        {% endif %}
+
+        <section>
+            <div>
+                <a href="{{ url_for('detalle.Hoteles') }}" method="GET">
+                    <button type="button">Volver</button>
+                </a>
+            </div>
+        </section>
+    </div>
 
     <footer>
-            © 2024 Agencia de Viajes. Todos los derechos reservados.
-        </footer>
-
+        © 2024 Agencia de Viajes. Todos los derechos reservados.
+    </footer>
 </body>
 </html>

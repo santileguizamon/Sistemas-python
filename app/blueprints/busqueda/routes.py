@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime
 import sqlite3
-import random
+from serpapi import GoogleSearch
 import requests
 from app.db.conexion import conectar
 from config import HEADERS, JSONBIN_URL
@@ -108,75 +108,43 @@ def buscadorHotel():
     conexion.close()
 
 
-    return render_template('busqueda/busquedaHotel.html', hoteles=hoteles)
+    return render_template('busqueda/buscadorHotel.html', hoteles=hoteles)
     
 
-@busqueda_bp.route('/buscarVuelo', methods=['GET','POST'])
+@busqueda_bp.route('/buscarVuelo', methods=['GET', 'POST'])
 def buscarVuelo():
-    API_KEY = 'feea122bafbb43aa26a1e19e957c5a558392c4be1d498f7c8b89a7d911648c5b'
-    url = 'https://serpapi.com/search.json'
+    if request.method == 'POST':
+        origen = request.form['origen']
+        destino = request.form['destino']
+        fecha_ida = request.form['fecha-ida']
+        fecha_vuelta = request.form['fecha-vuelta']
 
-    departure_airports = ['PEK', 'LAX', 'JFK', 'ORD', 'SFO']
-    arrival_airports = ['AUS', 'DFW', 'ATL', 'SEA', 'DEN']
+        # Asegúrate de que los parámetros sean correctos
+        params = {
+            'engine': 'google_flights',
+            'departure_id': origen,
+            'arrival_id': destino,
+            'outbound_date': fecha_ida,
+            'return_date': fecha_vuelta,
+            'currency': 'USD',  # Corrige el parámetro a 'currency'
+            'hl': 'es',
+            'api_key': 'feea122bafbb43aa26a1e19e957c5a558392c4be1d498f7c8b89a7d911648c5b'
+        }
 
-    departure_id = random.choice(departure_airports)
-    arrival_id = random.choice(arrival_airports)
+        # Realiza la solicitud GET a la API de SerpApi
+        response = requests.get("https://serpapi.com/search.json", params=params)
 
-    params = {
-        'engine': 'google_flights',
-        'departure_id': departure_id, 
-        'arrival_id': arrival_id,    
-        'outbound_date': '2024-11-26',
-        'return_date': '2025-11-30',
-        'currency': 'USD',
-        'hl': 'en',
-        'api_key': API_KEY
-    }
+        if response.status_code == 200:
+            vuelos = response.json().get('flights', [])
+        else:
+            vuelos = []
+            print(f"Error en la solicitud a SerpApi: {response.status_code} - {response.text}")
 
-    response = requests.get(url, params=params)
+        return render_template('busqueda/buscarVuelo.html', vuelos=vuelos)
+    else:
+        # Si es un GET, simplemente muestra el formulario vacío
+        return render_template('busqueda/buscarVuelo.html', vuelos=None)
 
-    if pasajeros:
-        query += " AND pasajeros >= ?"
-        params.append(pasajeros)
-
-    try:
-        cursor.execute(query, params)
-        vuelos = cursor.fetchall()
-    except Exception as e:
-        print(f"Error al buscar vuelos: {e}")
-        vuelos = []
-
-    conexion.close()
-
-    return render_template('busqueda/busquedaVuelos.html', vuelos=vuelos)
-
-
-@busqueda_bp.route('/buscarHotel', methods=['GET','POST'])
-def buscarHotel():
-    API_KEY = 'fb111263230578555f787dca0c591a8fe89e1aeb0665edde45daf8b3f29e8250'
-    url = "https://serpapi.com/search.json"
-
-    params = {
-        "engine": "google_hotels",
-        "q": "Bali Resorts",
-        "check_in_date": "2024-11-29",
-        "check_out_date": "2025-11-30",
-        "adults": 2,
-        "currency": "USD",
-        "gl": "us",
-        "hl": "en",
-        'api_key': API_KEY
-    }
-
-    response = requests.get(url, params=params)
-    
-    if response.status_code != 200:
-        return f"Error en la API: {response.status_code} - {response.text}"
-
-    results = response.json()
-    hotels = results.get('properties', [])
-
-    return render_template('busqueda/buscarHotel.html', hotels=hotels)
 
 @busqueda_bp.route('/buscar_Precios_de_Vuelos')
 def buscar_Precios_de_Vuelos():
@@ -310,22 +278,10 @@ def ver_vuelos():
 @busqueda_bp.route('/crear_hotel', methods=['GET', 'POST'])
 def crear_hotel():
     if request.method == 'POST':
-        nombre = request.form.get('nombre', '').strip()
-        descripcion = request.form.get('descripcion', '').strip()
-        habitaciones = request.form.get('habitaciones', '').strip()
+        nombre = request.form['nombre']
+        descripcion = request.form['descripcion']
+        habitaciones = request.form['habitaciones']
 
-        if not nombre or not descripcion or not habitaciones:
-            flash('Todos los campos son obligatorios.')
-            return redirect(url_for('busqueda.crear_hotel'))
-
-        # Verifica que el número de habitaciones sea un valor válido
-        try:
-            habitaciones = int(habitaciones)
-        except ValueError:
-            flash('El número de habitaciones debe ser un número entero.')
-            return redirect(url_for('busqueda.crear_hotel'))
-
-        # Inserta en la base de datos
         conexion = conectar()
         cursor = conexion.cursor()
         cursor.execute("""
@@ -339,7 +295,6 @@ def crear_hotel():
         return redirect(url_for('busqueda.ver_hoteles'))
 
     return render_template('busqueda/crear_hotel.html')
-
 
 
 @busqueda_bp.route('/editar_hotel/<int:id>', methods=['GET', 'POST'])
@@ -392,3 +347,39 @@ def ver_hoteles():
     conexion.close()
     
     return render_template('busqueda/ver_hoteles.html', hoteles=hoteles)
+
+@busqueda_bp.route('/buscarHotel', methods=['GET', 'POST'])
+def buscarHotel():
+    if request.method == 'POST':
+
+        ubicacion = request.form.get('ubicacion', '').strip()
+        fecha_checkin = request.form.get('checkin', '').strip()
+        fecha_checkout = request.form.get('checkout', '').strip()
+        numero_adultos = request.form.get('adultos', '').strip()
+
+        API_KEY = "feea122bafbb43aa26a1e19e957c5a558392c4be1d498f7c8b89a7d911648c5b"
+        
+        params = {
+            "engine": "google_hotels",
+            "q": ubicacion if ubicacion else "Bali Resorts",  
+            "check_in_date": fecha_checkin if fecha_checkin else "2024-11-27",  
+            "check_out_date": fecha_checkout if fecha_checkout else "2024-11-28",  
+            "adults": numero_adultos if numero_adultos else "2",  
+            "currency": "USD",  
+            "gl": "us", 
+            "hl": "en",  
+            "api_key": API_KEY 
+        }
+
+        search = GoogleSearch(params)
+        results = search.get_dict()
+
+        hotels = results.get('properties', [])
+        
+        if not hotels:
+            error_message = "No se encontraron hoteles para los parámetros proporcionados."
+            return render_template('busqueda/buscarHotel.html', error_message=error_message)
+        
+        return render_template('busqueda/buscarHotel.html', hotels=hotels)
+
+    return render_template('busqueda/buscarHotel.html')
